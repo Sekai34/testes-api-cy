@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('clonar repositório') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Sekai34/testes-api-cy.git  '
+            }
+        }
+    }
+}
+
+stages {
+        stage('instalar dependencias') {
+            steps {
+               sh 'npm install'
+            }
+        }
+    }
+
+
+
+stages {
+        stage('executar testes') {
+            steps {
+              sh 'NO_COLOR=1 npm run cy:run'
+            }
+        }
+    }
+
